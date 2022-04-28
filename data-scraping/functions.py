@@ -94,7 +94,6 @@ def scrape_info_from_one_page(one_page):
     one_page_df = pd.DataFrame()
     for i in range(len(one_page)):
         tmp_film = scrape_info_from_one_film(one_page[i])
-        tmp_film['page_link'] = one_page[i]
         one_page_df = one_page_df.append(tmp_film, ignore_index=True)
     return one_page_df
 
@@ -121,7 +120,7 @@ def scrape_info_from_all_pages(links_to_scrape):
 
 def scrape_n_films_for_each_date(release_dates):
     n_films_for_each_link = pd.DataFrame()
-    for date in tqdm.tqdm(range(0, len(release_dates), 2)):
+    for date in tqdm.tqdm(range(0, len(release_dates)-1, 2)):
         url = f'https://www.imdb.com/search/title/?release_date={release_dates[date]},{release_dates[date+1]}'
         page = requests.get(url)
         soup = BeautifulSoup(page.content, features="lxml")
