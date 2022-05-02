@@ -53,6 +53,8 @@ def draw_actual_vs_predicted(
 
     cor = np.corrcoef(y_test, y_pred)[0][1]
     fig = px.scatter(x=y_test, y=y_pred)
+    fig.update_xaxes(range=[1, 10])
+    fig.update_yaxes(range=[1, 10])
     fig.update_layout(
         title=f"Correlation between the actual and predicted values: {round(cor, 5)}", 
         xaxis_title="Actual",

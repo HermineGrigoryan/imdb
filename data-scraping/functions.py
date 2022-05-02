@@ -120,7 +120,7 @@ def scrape_info_from_all_pages(links_to_scrape):
 
 def scrape_n_films_for_each_date(release_dates):
     n_films_for_each_link = pd.DataFrame()
-    for date in tqdm.tqdm(range(0, len(release_dates)-1, 2)):
+    for date in tqdm.tqdm(range(0, len(release_dates)-1, 1)):
         url = f'https://www.imdb.com/search/title/?release_date={release_dates[date]},{release_dates[date+1]}'
         page = requests.get(url)
         soup = BeautifulSoup(page.content, features="lxml")
