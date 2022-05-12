@@ -22,4 +22,4 @@ __pycache__
 /catboost_info
 /.ipynb_checkpoints
 /papers
-
+*.csv
