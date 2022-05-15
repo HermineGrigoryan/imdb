@@ -24,3 +24,5 @@ __pycache__
 /papers
 test*
 *.csv
+
+models/topic_model
