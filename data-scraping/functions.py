@@ -7,7 +7,14 @@ from bs4 import BeautifulSoup
 import time
 
 def scrape_info_from_one_film(one_film):
-    
+    """Scrapes info from one film.
+
+    Args:
+        one_film (BeautifulSoup object): a BeautifulSoup object containing information on one film.
+
+    Returns:
+        dict: a dictionary with information for one film.
+    """
     try:
         title = one_film.find('a').text
     except AttributeError:
@@ -91,6 +98,15 @@ def scrape_info_from_one_film(one_film):
 
 
 def scrape_info_from_one_page(one_page):
+    """
+    Scrapes information from one page.
+
+    Args:
+        one_page (BeautifulSoup object): a BeautifulSoup object containing information on films in one page.
+
+    Returns:
+        pd.DataFrame: a data frame containing information on films in one page.
+    """
     one_page_df = pd.DataFrame()
     for i in range(len(one_page)):
         tmp_film = scrape_info_from_one_film(one_page[i])
@@ -119,6 +135,15 @@ def scrape_info_from_all_pages(links_to_scrape):
 
 
 def scrape_n_films_for_each_date(release_dates):
+    """
+    Scrapes how many films should be scraped for each release date.
+
+    Args:
+        release_dates (pd.DatetimeIndex): a range of release dates.
+
+    Returns:
+        pd.DataFrame: a data frame containing information about the url and the number of films that should be scraped.
+    """
     n_films_for_each_link = pd.DataFrame()
     for date in tqdm.tqdm(range(0, len(release_dates)-1, 1)):
         url = f'https://www.imdb.com/search/title/?release_date={release_dates[date]},{release_dates[date+1]}'
