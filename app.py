@@ -1,3 +1,4 @@
+from dataclasses import replace
 import streamlit as st
 import functions
 import numpy as np
@@ -60,7 +61,7 @@ if menu_options == 'Search a movie':
             selected_movies = imdb_df[imdb_df.topic==topics[0]].reset_index(drop=True)
             how_many_movies = st.slider('Number of random movies from the topic', 4, 24, 8, 4)
             col1, col2, col3, col4 = st.columns(4)
-            random_n = selected_movies.iloc[np.random.choice(selected_movies.shape[0], how_many_movies),]
+            random_n = selected_movies.iloc[np.random.choice(selected_movies.shape[0], how_many_movies, replace=False),]
 
             with col1:
                 for i in range(0, how_many_movies//4, 1):
